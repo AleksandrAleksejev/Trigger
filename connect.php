@@ -4,7 +4,7 @@ $server='localhost'; //d70420.mysql.zonevs.eu
 $andmebaas='raamatukogu';
 $salasyna='raamatudIgaveseks'; //d70420_irinabaas
 //teeme käsk mis ühendab andmebaasiga
-$yhendus=new mysqli($server, $kasutaja, $salasyna, $andmebaas);
+$yhendus= new mysqli($server,$kasutaja,$salasyna,$andmebaas);
 $yhendus->set_charset('UTF8');
 /*
  * CREATE TABLE loomad(
@@ -15,5 +15,3 @@ $yhendus->set_charset('UTF8');
     silmadeVarv varchar(15))
 */
 ?>
-
-
