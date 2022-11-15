@@ -1,7 +1,22 @@
+<?php
+require_once ('connect.php');
+global $yhendus;
+//andmete lisamine tabelisse
+if(isset($_REQUEST['lisamisvorm']) && !empty($_REQUEST['raamatu'])){
+    $paring=$yhendus->prepare('INSERT INTO loomadevarjupaik(raamatuNimi,kirjutamiseAasta,autor) Values(?,?,?)');
+    $paring->bind_param('sis',$_REQUEST['nimi'],$_REQUEST['kirjutamiseAasta'],$_REQUEST['autor']);
     $paring->execute();
 }
 
-$paring=$yhendus->prepare('SELECT raamatuID, raamatuNimi,kirjutamiseAasta,autor FROM loomadevarjupaik');
+
+//kustutamine
+if(isset($_REQUEST['kustutusid'])) {
+    $paring = $yhendus->prepare('DELETE FROM loomadevarjupaik WHERE raamatuID=?');
+    $paring->bind_param('i', $_REQUEST['kustutusid']);
+    $paring->execute();
+}
+
+$paring=$yhendus->prepare('SELECT raamatuID, raamatuNimi,kirjutamiseAasta,autor FROM raamatu');
 $paring->bind_result($raamatuID, $raamatuNimi, $kirjutamiseAasta,$autor);
 $paring->execute();
 ?>
@@ -55,5 +70,4 @@ $paring->execute();
 $yhendus->close();
 ?>
 </html>
-
 
